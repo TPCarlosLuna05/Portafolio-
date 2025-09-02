@@ -1,0 +1,157 @@
+---
+import * as SimpleIcons from 'simple-icons';
+
+const getIcon = (name) => {
+  const normalizedName = name.toLowerCase()
+    .replace(/\./g, "dot")
+    .replace(/\+/g, "plus")
+    .replace(/#/g, "sharp");
+  
+  const iconKey = Object.keys(SimpleIcons).find(key => 
+    key.toLowerCase() === `si${normalizedName}` ||
+    key.toLowerCase() === `si${normalizedName.replace(/[^a-z0-9]/g, "")}`
+  );
+  
+  return iconKey ? SimpleIcons[iconKey] : null;
+};
+
+const skills = [
+  {
+    category: "Frontend",
+    technologies: [
+      { name: "HTML5", icon: "html5" },
+      { name: "CSS3", icon: "css3" },
+      { name: "JavaScript", icon: "javascript" },
+      { name: "TypeScript", icon: "typescript" },
+      { name: "React", icon: "react" },
+      { name: "Vue.js", icon: "vuedotjs" }
+    ]
+  },
+  {
+    category: "Backend",
+    technologies: [
+      { name: "Node.js", icon: "nodedotjs" },
+      { name: "Express", icon: "express" },
+      { name: "Python", icon: "python" },
+      { name: "Django", icon: "django" },
+      { name: "PostgreSQL", icon: "postgresql" },
+      { name: "MongoDB", icon: "mongodb" }
+    ]
+  },
+  {
+    category: "Herramientas",
+    technologies: [
+      { name: "Git", icon: "git" },
+      { name: "Docker", icon: "docker" },
+      { name: "AWS", icon: "amazonaws" },
+      { name: "Linux", icon: "linux" },
+      { name: "VS Code", icon: "visualstudiocode" },
+      { name: "Figma", icon: "figma" }
+    ]
+  }
+];
+---
+
+<section id="habilidades" class="skills">
+  <div class="container">
+    <h2>Habilidades</h2>
+    <div class="skills-grid">
+      {
+        skills.map((skillSet) => (
+          <div class="skill-category">
+            <h3>{skillSet.category}</h3>
+            <ul class="skill-list">
+              {skillSet.technologies.map((tech) => {
+                const icon = getIcon(tech.icon);
+                return (
+                  <li>
+                    {icon && (
+                      <span class="icon">
+                        <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" set:html={icon.svg} />
+                      </span>
+                    )}
+                    <span>{tech.name}</span>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .skills {
+    background-color: var(--background);
+  }
+
+  h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+  }
+
+  .skill-category {
+    background: var(--section-bg);
+    padding: 2rem;
+    border-radius: 1rem;
+  }
+
+  .skill-category h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+
+  .skill-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+  }
+
+  .skill-list li {
+    background: var(--background);
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: transform 0.2s ease;
+  }
+
+  .skill-list li:hover {
+    transform: translateY(-2px);
+  }
+
+  .icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .icon svg {
+    width: 1.2rem;
+    height: 1.2rem;
+    fill: #ffffff;
+  }
+
+  @media (max-width: 768px) {
+    h2 {
+      font-size: 2rem;
+    }
+    
+    .skill-list {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,85 @@
+---
+const experiences = [
+  {
+    title: "Estudiante de Ingeniería",
+    company: "Universidad Autónoma de Tamaulipas",
+    period: "2023 - Actualidad",
+    description: "Cursando la carrera de Ingeniería en Sistemas Computacionales, desarrollando habilidades en programación y tecnologías de la información."
+  },
+  {
+    title: "Servicio Social",
+    company: "Laboratorios de Informática, CBTis 103, Tampico, Tamaulipas",
+    period: "2023",
+    description: "Apoyo y asistencia técnica en los laboratorios de informática durante el servicio social."
+  },
+];
+---
+
+<section id="experiencia" class="experience">
+  <div class="container">
+    <h2>Experiencia</h2>
+    <div class="experience-grid">
+      {
+        experiences.map((exp) => (
+          <div class="experience-card">
+            <h3>{exp.title}</h3>
+            <p class="company">{exp.company}</p>
+            <p class="period">{exp.period}</p>
+            <p class="description">{exp.description}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .experience {
+    background-color: var(--background);
+  }
+
+  h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  .experience-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  .experience-card {
+    background: var(--section-bg);
+    padding: 2rem;
+    border-radius: 1rem;
+    transition: transform 0.3s ease;
+  }
+
+  .experience-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .experience-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+  }
+
+  .company {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+
+  .period {
+    color: var(--light-text);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+
+  @media (max-width: 768px) {
+    h2 {
+      font-size: 2rem;
+    }
+  }
+</style>
